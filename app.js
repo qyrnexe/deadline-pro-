@@ -248,6 +248,11 @@
     try { localStorage.setItem(`${KEY}-last-opened`, today); } catch {}
   }
   applyNewDayRecovery();
-  saveState();
+saveState();
+render();
+
+// Check deadlines and update Mochi's mood every minute.
+setInterval(() => {
   render();
+}, 60_000);
 })();
