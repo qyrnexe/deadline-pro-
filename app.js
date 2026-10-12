@@ -78,14 +78,47 @@
     return "You showed up today. That counts, too.";
   }
   function renderPetMessage(stats) {
-    let msg = "I'm glad we're doing this together 🌼";
-    if (state.tasks.length && stats.remaining === 0) msg = "Look at us go! We did it together ✨";
-    else if (stats.completed > 0) msg = "Every little win helps us grow 🌱";
-    else if (state.tasks.some(t => t.deadline && new Date(t.deadline) < new Date() && !t.done)) msg = "It's okay. Let's choose one small next step 💚";
-    $("pet-message").textContent = msg;
-    const pet = $("pet-character");
-    pet.setAttribute("aria-label", `${state.petName}, your ${stageName(state.stage).toLowerCase()} companion`);
-    pet.classList.toggle("celebrate", stats.remaining === 0 && state.tasks.length > 0);
+  const now = new Date();
+
+  const overdueTasks = state.tasks.filter(task =>
+    task.deadline &&
+    new Date(task.deadline) < now &&
+    !task.done
+  );
+
+  const pet = $("pet-character");
+
+  if (overdueTasks.length > 0) {
+    state.happiness = Math.max(10, 40 - overdueTasks.length * 10);
+
+    $("pet-message").textContent =
+      "Oh no, we missed a deadline... Let's try again together. 💧";
+
+    pet.classList.add("sad");
+    pet.classList.remove("celebrate");
+  } else {
+    pet.classList.remove("sad");
+
+    $("pet-message").textContent =
+      stats.remaining === 0 && state.tasks.length > 0
+        ? "Look at us go! We did it together ✨"
+        : stats.completed > 0
+          ? "Every little win helps us grow 🌱"
+          : "I'm glad we're doing this together 🌼";
+
+    pet.classList.toggle(
+      "celebrate",
+      stats.remaining === 0 && state.tasks.length > 0
+    );
+  }
+
+  $("happiness-value").textContent = `${state.happiness}%`;
+  $("happiness-bar").style.width = `${state.happiness}%`;
+
+  pet.setAttribute(
+    "aria-label",
+    `${state.petName}, your ${stageName(state.stage).toLowerCase()} companion`
+  );
   }
   function makeTaskElement(task) {
     const item = document.createElement("article");
