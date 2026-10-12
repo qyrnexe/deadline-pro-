@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f5ee">
+  <title>Deadline Pro — Grow Together</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Deadline Pro home">
+        <span class="brand-mark">✿</span>
+        <span><strong>deadline<span class="brand-pro">pro</span></strong><small>GROW TOGETHER</small></span>
+      </a>
+      <button class="icon-button" id="settings-open" aria-label="Open settings" title="Settings">⚙</button>
+    </header>
+
+    <section class="welcome-row">
+      <div>
+        <p class="eyebrow" id="date-label">YOUR LITTLE CORNER</p>
+        <h1>One little step<br><span>at a time.</span></h1>
+        <p class="subheading" id="greeting">You and your buddy have got this.</p>
+      </div>
+      <div class="sun-doodle" aria-hidden="true">☀</div>
+    </section>
+
+    <section class="pet-card card">
+      <div class="pet-card-top">
+        <div><span class="pill"><span class="status-dot"></span> YOUR COMPANION</span>
+          <h2 id="pet-name-heading">Mochi</h2>
+          <p class="pet-stage" id="pet-stage">Tiny sprout · Stage 1</p>
+        </div>
+        <button class="rename-button" id="rename-open" type="button">Rename ✎</button>
+      </div>
+      <div class="pet-scene">
+        <div class="sparkle sparkle-one">✦</div><div class="sparkle sparkle-two">✧</div>
+        <div class="pet-shadow"></div>
+        <div class="pet" id="pet-character" role="img" aria-label="Your happy little pet">
+          <div class="pet-ear ear-left"></div><div class="pet-ear ear-right"></div>
+          <div class="pet-blush blush-left"></div><div class="pet-blush blush-right"></div>
+          <div class="pet-eye eye-left"></div><div class="pet-eye eye-right"></div>
+          <div class="pet-mouth"></div><div class="pet-belly"></div>
+          <div class="pet-leaf">✿</div>
+        </div>
+        <div class="pet-message" id="pet-message">I'm glad we're doing this together 🌼</div>
+      </div>
+      <div class="pet-stats">
+        <div class="stat">
+          <div class="stat-label"><span>Happiness</span><strong id="happiness-value">80%</strong></div>
+          <div class="progress-track"><span id="happiness-bar" style="width:80%"></span></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label"><span>Growing</span><strong id="growth-value">0%</strong></div>
+          <div class="progress-track growth-track"><span id="growth-bar" style="width:0%"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="progress-card card">
+      <div class="section-heading">
+        <div><p class="eyebrow">LITTLE WINS ADD UP</p><h2>Today's progress</h2></div>
+        <div class="progress-ring" id="progress-ring"><div><strong id="progress-number">0%</strong><small>done</small></div></div>
+      </div>
+      <div class="progress-summary"><span><b id="completed-count">0</b> completed</span><span><b id="remaining-count">0</b> left to do</span></div>
+      <div class="daily-track"><span id="daily-bar" style="width:0%"></span></div>
+    </section>
+
+    <section class="tasks-section">
+      <div class="section-heading tasks-title">
+        <div><p class="eyebrow">MAKE TODAY YOURS</p><h2>Today's little goals</h2></div>
+        <button class="add-button" id="add-open" type="button"><span>＋</span> Add task</button>
+      </div>
+      <form class="add-form card hidden" id="task-form">
+        <label for="task-title">What would you like to do?</label>
+        <input id="task-title" maxlength="90" placeholder="e.g. Read 10 pages" required>
+        <div class="form-row">
+          <div class="form-field"><label for="task-deadline">Due date & time</label><input id="task-deadline" type="datetime-local"></div>
+          <div class="form-field"><label for="task-priority">Priority</label><select id="task-priority"><option value="gentle">Gentle</option><option value="normal" selected>Important</option><option value="high">Very important</option></select></div>
+        </div>
+        <div class="form-actions"><button class="text-button" id="task-cancel" type="button">Cancel</button><button class="primary-button" type="submit">Save little goal</button></div>
+      </form>
+      <div class="task-list" id="task-list"></div>
+      <div class="empty-state card" id="empty-state">
+        <div class="empty-illustration">🌷</div>
+        <h3>A fresh page, just for you.</h3>
+        <p>Every big thing starts with one small step. Add your first little goal.</p>
+        <button class="primary-button" id="empty-add" type="button">＋ Add my first task</button>
+      </div>
+    </section>
+
+    <section class="kindness-note">
+      <span>♡</span><p><strong>Gentle reminder</strong><br>You don't need a perfect day. Just one small step forward.</p>
+    </section>
+
+    <footer>Made for progress, not perfection <span>✿</span></footer>
+  </main>
+
+  <dialog id="rename-dialog" class="dialog">
+    <form method="dialog" id="rename-form">
+      <p class="eyebrow">A NAME OF THEIR OWN</p><h2>What should we call your buddy?</h2>
+      <input id="pet-name-input" maxlength="24" value="Mochi" required>
+      <div class="form-actions"><button class="text-button" value="cancel">Cancel</button><button class="primary-button" id="rename-save" value="save">Save name</button></div>
+    </form>
+  </dialog>
+  <dialog id="settings-dialog" class="dialog">
+    <form method="dialog">
+      <p class="eyebrow">YOUR LITTLE CORNER</p><h2>Settings</h2>
+      <p class="settings-copy">Your tasks and pet progress are saved in this browser on this device. No account needed.</p>
+      <button class="reset-button" id="reset-data" type="button">Reset all progress</button>
+      <div class="form-actions"><button class="primary-button" value="close">All done</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
